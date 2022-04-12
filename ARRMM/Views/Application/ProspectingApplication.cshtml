@@ -1,0 +1,561 @@
+﻿@model ARRMM.Models.ProspectingModel
+@using ARRMM.Utilities.Enums
+<h4>ProspectingModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="ProspectingApplication">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ApplicantName" class="control-label"></label>
+                <input asp-for="ApplicantName" class="form-control" />
+                <span asp-validation-for="ApplicantName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SelectedMineralIds" class="control-label"></label>
+                <select multiple="multiple" asp-for="SelectedMineralIds" asp-items="Model.Minerals"></select>
+                <span asp-validation-for="Minerals" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LandAreaSize" class="control-label"></label>
+                <input asp-for="LandAreaSize" class="form-control" />
+                <span asp-validation-for="LandAreaSize" class="text-danger"></span>
+            </div>
+            <fieldset>
+                <legend>Location</legend>
+                <div class="form-group">
+                    <label asp-for="Location.Description" class="control-label"></label>
+                    <input asp-for="Location.Description" class="form-control" />
+                    <span asp-validation-for="Location.Description" class="text-danger"></span>
+                </div>
+                <table id="locationTable" class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <td>Latitude</td>
+                            <td>Longitude</td>
+                        </tr>
+                    </thead>
+                    <tr id="locationTableRow0">
+                        <td>
+                            <div class="editor-field">
+                                <input asp-for="Location.Coordinates[0].Latitude" class="form-control" />
+                                <span asp-validation-for="Location.Coordinates[0].Latitude" class="text-danger"></span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="editor-field">
+                                <input asp-for="Location.Coordinates[0].Longitude" class="form-control" />
+                                <span asp-validation-for="Location.Coordinates[0].Longitude" class="text-danger"></span>
+                            </div>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-primary" onclick="removeLocationTr(0);">Delete</button>
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                </table>
+                <p>
+                    <button id="addLocation" type="button" class="btn btn-primary">Add</button>
+                </p>
+            </fieldset>
+            <div class="form-group">
+                <label asp-for="ApplicantType" class="control-label"></label>
+                <select asp-for="ApplicantType" asp-items="Model.ApplicantTypes"></select>
+                <span asp-validation-for="ApplicantType" class="text-danger"></span>
+            </div>
+            <div id="individual" hidden="hidden">
+                <div class="form-group">
+                    <input asp-for="ApplicantDetails[0].FirstName" class="form-control" />
+                    <span asp-validation-for="ApplicantDetails[0].FirstName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input asp-for="ApplicantDetails[0].LastName" class="form-control" />
+                    <span asp-validation-for="ApplicantDetails[0].LastName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input asp-for="ApplicantDetails[0].FatherName" class="form-control" />
+                    <span asp-validation-for="ApplicantDetails[0].FatherName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input asp-for="ApplicantDetails[0].NicNumber" class="form-control" />
+                    <span asp-validation-for="ApplicantDetails[0].NicNumber" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input asp-for="ApplicantDetails[0].NicIssueDate" class="form-control" />
+                    <span asp-validation-for="ApplicantDetails[0].NicIssueDate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input asp-for="ApplicantDetails[0].NicIssuePlace" class="form-control" />
+                    <span asp-validation-for="ApplicantDetails[0].NicIssuePlace" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input asp-for="ApplicantDetails[0].Address" class="form-control" />
+                    <span asp-validation-for="ApplicantDetails[0].Address" class="text-danger"></span>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="ApplicantDetails[0].IsLocalDomicile" /> @Html.DisplayNameFor(model => model.ApplicantDetails[0].IsLocalDomicile)
+                    </label>
+                </div>
+                <div class="form-group">
+                    <input asp-for="ApplicantDetails[0].NameOfTribe" class="form-control" />
+                    <span asp-validation-for="ApplicantDetails[0].NameOfTribe" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input asp-for="ApplicantDetails[0].NameOfDistrict" class="form-control" />
+                    <span asp-validation-for="ApplicantDetails[0].NameOfDistrict" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input asp-for="ApplicantDetails[0].Occupation" class="form-control" />
+                    <span asp-validation-for="ApplicantDetails[0].Occupation" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input asp-for="ApplicantDetails[0].PlaceOfBusiness" class="form-control" />
+                    <span asp-validation-for="ApplicantDetails[0].PlaceOfBusiness" class="text-danger"></span>
+                </div>
+            </div>
+            <fieldset id="partnership" hidden="hidden">
+                <legend>ApplicantDetails</legend>
+                <table id="personsTable" class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <td>First Name</td>
+                            <td>Last Name</td>
+                            <td>Father Name</td>
+                            <td>Nic Number</td>
+                            <td>Occupation</td>
+                            <td>Local Domicile</td>
+                            <td>Name of tribe</td>
+                            <td>Name of district</td>
+                            <td>Shares percentage</td>
+                            <td>Person Type</td>
+                        </tr>
+                    </thead>
+                    <tr id="personsTableRow0">
+                        <td>
+                            <div class="editor-field">
+                                <input asp-for="ApplicantDetails[0].FirstName" class="form-control" />
+                                <span asp-validation-for="ApplicantDetails[0].FirstName" class="text-danger"></span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="editor-field">
+                                <input asp-for="ApplicantDetails[0].LastName" class="form-control" />
+                                <span asp-validation-for="ApplicantDetails[0].LastName" class="text-danger"></span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="editor-field">
+                                <input asp-for="ApplicantDetails[0].FatherName" class="form-control" />
+                                <span asp-validation-for="ApplicantDetails[0].FatherName" class="text-danger"></span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="editor-field">
+                                <input asp-for="ApplicantDetails[0].NicNumber" class="form-control" />
+                                <span asp-validation-for="ApplicantDetails[0].NicNumber" class="text-danger"></span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="editor-field">
+                                <input asp-for="ApplicantDetails[0].Occupation" class="form-control" />
+                                <span asp-validation-for="ApplicantDetails[0].Occupation" class="text-danger"></span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="checkbox">
+                                <label>
+                                    <input asp-for="ApplicantDetails[0].IsLocalDomicile" /> @Html.DisplayNameFor(model => model.ApplicantDetails[0].IsLocalDomicile)
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="editor-field">
+                                <input asp-for="ApplicantDetails[0].NameOfTribe" class="form-control" />
+                                <span asp-validation-for="ApplicantDetails[0].NameOfTribe" class="text-danger"></span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="editor-field">
+                                <input asp-for="ApplicantDetails[0].NameOfDistrict" class="form-control" />
+                                <span asp-validation-for="ApplicantDetails[0].NameOfDistrict" class="text-danger"></span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="editor-field">
+                                <input asp-for="ApplicantDetails[0].SharesPercentage" class="form-control" />
+                                <span asp-validation-for="ApplicantDetails[0].SharesPercentage" class="text-danger"></span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="editor-field">
+                                <select asp-for="ApplicantDetails[0].Type" asp-items="Model.PersonTypes"></select>
+                            </div>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-primary" onclick="removePersonsTr(0);">Delete</button>
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                </table>
+                <p>
+                    <button id="addPerson" type="button" class="btn btn-primary">Add</button>
+                </p>
+            </fieldset>
+            <div id="company" hidden="hidden">
+                <div class="form-group">
+                    <label asp-for="Authorized" class="control-label"></label>
+                    <input asp-for="Authorized" class="form-control" />
+                    <span asp-validation-for="Authorized" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="IssuedAndSubscribed" class="control-label"></label>
+                    <input asp-for="IssuedAndSubscribed" class="form-control" />
+                    <span asp-validation-for="IssuedAndSubscribed" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="BusinessName" class="control-label"></label>
+                    <input asp-for="BusinessName" class="form-control" />
+                    <span asp-validation-for="BusinessName" class="text-danger"></span>
+                </div>
+                <fieldset>
+                    <legend>ApplicantDetails</legend>
+                    <table id="personsTable" class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <td>First Name</td>
+                                <td>Last Name</td>
+                                <td>Father Name</td>
+                                <td>Address</td>
+                                <td>Occupation</td>
+                                <td>Local Domicile</td>
+                                <td>Name of tribe</td>
+                                <td>Name of district</td>
+                                <td>Shares percentage</td>
+                                <td>Person Type</td>
+                            </tr>
+                        </thead>
+                        <tr id="personsTableRow0">
+                            <td>
+                                <div class="editor-field">
+                                    <input asp-for="ApplicantDetails[0].FirstName" class="form-control" />
+                                    <span asp-validation-for="ApplicantDetails[0].FirstName" class="text-danger"></span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="editor-field">
+                                    <input asp-for="ApplicantDetails[0].LastName" class="form-control" />
+                                    <span asp-validation-for="ApplicantDetails[0].LastName" class="text-danger"></span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="editor-field">
+                                    <input asp-for="ApplicantDetails[0].FatherName" class="form-control" />
+                                    <span asp-validation-for="ApplicantDetails[0].FatherName" class="text-danger"></span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="editor-field">
+                                    <input asp-for="ApplicantDetails[0].Address" class="form-control" />
+                                    <span asp-validation-for="ApplicantDetails[0].Address" class="text-danger"></span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="editor-field">
+                                    <input asp-for="ApplicantDetails[0].Occupation" class="form-control" />
+                                    <span asp-validation-for="ApplicantDetails[0].Occupation" class="text-danger"></span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="checkbox">
+                                    <label>
+                                        <input asp-for="ApplicantDetails[0].IsLocalDomicile" /> @Html.DisplayNameFor(model => model.ApplicantDetails[0].IsLocalDomicile)
+                                    </label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="editor-field">
+                                    <input asp-for="ApplicantDetails[0].NameOfTribe" class="form-control" />
+                                    <span asp-validation-for="ApplicantDetails[0].NameOfTribe" class="text-danger"></span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="editor-field">
+                                    <input asp-for="ApplicantDetails[0].NameOfDistrict" class="form-control" />
+                                    <span asp-validation-for="ApplicantDetails[0].NameOfDistrict" class="text-danger"></span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="editor-field">
+                                    <input asp-for="ApplicantDetails[0].SharesPercentage" class="form-control" />
+                                    <span asp-validation-for="ApplicantDetails[0].SharesPercentage" class="text-danger"></span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="editor-field">
+                                    <select asp-for="ApplicantDetails[0].Type" asp-items="Model.PersonTypes"></select>
+                                </div>
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-primary" onclick="removePersonsTr(0);">Delete</button>
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                    </table>
+                    <p>
+                        <button id="addPerson" type="button" class="btn btn-primary">Add</button>
+                    </p>
+                </fieldset>
+            </div>
+            <div id="outsidePakistan" hidden="hidden">
+                <div class="form-group">
+                    <label asp-for="Authorized" class="control-label"></label>
+                    <input asp-for="Authorized" class="form-control" />
+                    <span asp-validation-for="Authorized" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="IssuedAndSubscribed" class="control-label"></label>
+                    <input asp-for="IssuedAndSubscribed" class="form-control" />
+                    <span asp-validation-for="IssuedAndSubscribed" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="BusinessName" class="control-label"></label>
+                    <input asp-for="BusinessName" class="form-control" />
+                    <span asp-validation-for="BusinessName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="AmountOfCapital" class="control-label"></label>
+                    <input asp-for="AmountOfCapital" class="form-control" />
+                    <span asp-validation-for="AmountOfCapital" class="text-danger"></span>
+                </div>
+                <fieldset>
+                    <legend>ApplicantDetails</legend>
+                    <table id="personsTable" class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <td>First Name</td>
+                                <td>Last Name</td>
+                                <td>Address</td>
+                                <td>Nationality</td>
+                                <td>Shares percentage</td>
+                                <td>Person Type</td>
+                            </tr>
+                        </thead>
+                        <tr id="personsTableRow0">
+                            <td>
+                                <div class="editor-field">
+                                    <input asp-for="ApplicantDetails[0].FirstName" class="form-control" />
+                                    <span asp-validation-for="ApplicantDetails[0].FirstName" class="text-danger"></span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="editor-field">
+                                    <input asp-for="ApplicantDetails[0].LastName" class="form-control" />
+                                    <span asp-validation-for="ApplicantDetails[0].LastName" class="text-danger"></span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="editor-field">
+                                    <input asp-for="ApplicantDetails[0].Address" class="form-control" />
+                                    <span asp-validation-for="ApplicantDetails[0].Address" class="text-danger"></span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="editor-field">
+                                    <select asp-for="ApplicantDetails[0].CountryId" asp-items="Model.Countries"></select>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="editor-field">
+                                    <input asp-for="ApplicantDetails[0].SharesPercentage" class="form-control" />
+                                    <span asp-validation-for="ApplicantDetails[0].SharesPercentage" class="text-danger"></span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="editor-field">
+                                    <select asp-for="ApplicantDetails[0].Type" asp-items="Model.PersonTypes"></select>
+                                </div>
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-primary" onclick="removePersonsTr(0);">Delete</button>
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                    </table>
+                    <p>
+                        <button id="addPerson" type="button" class="btn btn-primary">Add</button>
+                    </p>
+                </fieldset>
+            </div>
+            <div class="form-group">
+                <label asp-for="PreviousMiningExperienceDetail" class="control-label"></label>
+                <input asp-for="PreviousMiningExperienceDetail" class="form-control" />
+                <span asp-validation-for="PreviousMiningExperienceDetail" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PastSubmittedApplicationDetail" class="control-label"></label>
+                <input asp-for="PastSubmittedApplicationDetail" class="form-control" />
+                <span asp-validation-for="PastSubmittedApplicationDetail" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NameOfTechnicalExpert" class="control-label"></label>
+                <input asp-for="NameOfTechnicalExpert" class="form-control" />
+                <span asp-validation-for="NameOfTechnicalExpert" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="QualificationOfTechnicalExpert" class="control-label"></label>
+                <input asp-for="QualificationOfTechnicalExpert" class="form-control" />
+                <span asp-validation-for="QualificationOfTechnicalExpert" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MiningConcessionsDetail" class="control-label"></label>
+                <input asp-for="MiningConcessionsDetail" class="form-control" />
+                <span asp-validation-for="MiningConcessionsDetail" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GovernmentDuesDetail" class="control-label"></label>
+                <input asp-for="GovernmentDuesDetail" class="form-control" />
+                <span asp-validation-for="GovernmentDuesDetail" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Remarks" class="control-label"></label>
+                <input asp-for="Remarks" class="form-control" />
+                <span asp-validation-for="Remarks" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ChallanNumber" class="control-label"></label>
+                <input asp-for="ChallanNumber" class="form-control" />
+                <span asp-validation-for="ChallanNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Dated" class="control-label"></label>
+                <input asp-for="Dated" class="form-control" />
+                <span asp-validation-for="Dated" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Amount" class="control-label"></label>
+                <input asp-for="Amount" class="form-control" />
+                <span asp-validation-for="Amount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AmountInWords" class="control-label"></label>
+                <input asp-for="AmountInWords" class="form-control" />
+                <span asp-validation-for="AmountInWords" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script type="text/javascript">
+        var personsCounter = 1;
+    $(function () {
+        $('#addPerson').click(function () {
+            $('<tr id="personsTableRow' + personsCounter + '"><td>' +
+                '<input type="text" class="text-box single-line" name="CompanyPersons[' + personsCounter + '].FirstName" value="" required="required" />' +
+                '</td>' +
+                '<td>' +
+                '<input type="text" class="text-box single-line" name="CompanyPersons[' + personsCounter + '].LastName" value="" required="required" />' +
+                '</td>' +
+                '<td>' +
+                '<input type="text" class="text-box single-line" name="CompanyPersons[' + personsCounter + '].Address" value="" required="required" />' +
+                '</td>' +
+                '<td>' +
+                @*'<select>' +
+                    for (var i = 0; i <= @Model.Countries.Count; i++) {
+                        '<option value = "' +  @Model.Countries[i].Value '" >' +  @Model.Countries[i].Text '</option >'
+                    }
+                    '<option value = "' +  @Model.Countries[0].Value '" >' +  @Model.Countries[0].Text '</option >' +
+                    '<option value = "' +  @Model.Countries[1].Value '" >' +  @Model.Countries[1].Text '</option >' +
+                '</select >' +*@
+                '<input type="text" class="text-box single-line" name="CompanyPersons[' + personsCounter + '].CountryId" value="" required="required" />' +
+                '</td>' +
+                '<td>' +
+                '<button type="button" class="btn btn-primary" onclick="removePersonsTr(' + personsCounter + ');">Delete</button>' +
+                '</td>' +
+                '</tr>').appendTo('#personsTable');
+            personsCounter++;
+            return false;
+        });
+    });
+        function removePersonsTr(index) {
+        if (personsCounter > 1) {
+            $('#personsTableRow' + index).remove();
+            personsCounter--;
+        }
+        return false;
+    }
+
+
+    var locationCounter = 1;
+    $(function () {
+        $('#addLocation').click(function () {
+            $('<tr id="locationTableRow' + locationCounter + '"><td>' +
+                '<input type="text" class="text-box single-line" name="Location.Coordinates[' + locationCounter + '].Latitude" value="" required="required" />' +
+                '</td>' +
+                '<td>' +
+                '<input type="text" class="text-box single-line" name="Location.Coordinates[' + locationCounter + '].Longitude" value="" required="required" />' +
+                '</td>' +
+                '<td>' +
+                '<button type="button" class="btn btn-primary" onclick="removeLocationTr(' + locationCounter + ');">Delete</button>' +
+                '</td>' +
+                '</tr>').appendTo('#locationTable');
+    locationCounter++;
+    return false;
+        });
+    });
+    function removeLocationTr(index) {
+        if (locationCounter > 1) {
+            $('#locationTableRow' + index).remove();
+            locationCounter--;
+        }
+        return false;
+        }
+
+        $('#ApplicantType').on('change', function () {
+            if ($('#ApplicantType').find("option:selected")[0].value == 'Indivisual') {
+                $("#individual").show();
+                $("#partnership").hide();
+                $("#company").hide();
+                $("#outsidePakistan").hide();
+            }
+            else if ($('#ApplicantType').find("option:selected")[0].value == 'Partnership') {
+                $("#individual").hide();
+                $("#partnership").show();
+                $("#company").hide();
+                $("#outsidePakistan").hide();
+            }
+            else if ($('#ApplicantType').find("option:selected")[0].value == 'Company') {
+                $("#individual").hide();
+                $("#partnership").hide();
+                $("#company").show();
+                $("#outsidePakistan").hide();
+            }
+            else if ($('#ApplicantType').find("option:selected")[0].value == 'OutsidePakistan') {
+                $("#individual").hide();
+                $("#partnership").hide();
+                $("#company").hide();
+                $("#outsidePakistan").show();
+            }
+            else {
+                $("#individual").hide();
+                $("#partnership").hide();
+                $("#company").hide();
+                $("#outsidePakistan").hide();
+            }
+        });
+    </script>
+}

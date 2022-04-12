@@ -1,0 +1,22 @@
+﻿@using ARRMM.Views.Account
+@using ARRMM.Helpers
+
+@{
+    //var userName = User.Claims.Where(c => c.Type == System.Security.Claims.ClaimTypes.Name).Select(c => c.Value).SingleOrDefault();
+    //var authenticationResponse = await HttpClientHelper.GetAsync<UserAuthenticationInfo>("Account/GetAuthenticationDetail?userName=" + userName);
+    //var hasPassword = authenticationResponse == null 
+    //                        ? false
+    //                        : authenticationResponse.Data == null
+    //                            ? false
+    //                            : authenticationResponse.Data.HasPassword;
+    //var functionName = hasPassword ? "ChangePassword" : "SetPassword";
+    var functionName = "ChangePassword";
+}
+
+<ul class="nav nav-pills nav-stacked">
+    <li class="@ManageNavPages.IndexNavClass(ViewContext)"><a asp-action="UserProfile">Profile</a></li>
+    <li class="@ManageNavPages.ChangePasswordNavClass(ViewContext)"><a asp-action=@functionName>Password</a></li>
+    @*<li class="@ManageNavPages.ExternalLoginsNavClass(ViewContext)"><a asp-action="ManageLogins">External logins</a></li>
+    <li class="@ManageNavPages.TwoFactorAuthenticationNavClass(ViewContext)"><a asp-action="TwoFactorAuthentication">Two-factor authentication</a></li>*@
+</ul>
+

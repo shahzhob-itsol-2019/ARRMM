@@ -1,0 +1,113 @@
+﻿@model IEnumerable<ARRMM.Models.ApplicationModel>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ApplicationNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ScaleType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedAt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UpdatedAt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StatusId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SendBy)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SendTo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GrantedOrRefusedBy)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ApplicationNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Type)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ScaleType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedAt)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UpdatedAt)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StatusId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SendBy)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SendTo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GrantedOrRefusedBy)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<button>
+    <a asp-action="ReconnaissanceApplication">Reconnaissance Application</a>
+</button>
+<button>
+    <a asp-action="ExplorationApplicationIndividual">Exploration Application By Individual</a>
+</button>
+<button>
+    <a asp-action="ExplorationApplicationCompany">Exploration Application By Company</a>
+</button>
+<button>
+    <a asp-action="MineralDepositRetentionApplicationIndividual">Mineral Deposit Retention Application By Individual</a>
+</button>
+<button>
+    <a asp-action="MineralDepositRetentionApplicationCompany">Mineral Deposit Retention Application By Company</a>
+</button>
+<button>
+    <a asp-action="LargeMiningLeaseApplication">Large Mining Lease Application</a>
+</button>
+<button>
+    <a asp-action="ProspectingApplication">Prospecting Application</a>
+</button>
+<button>
+    <a asp-action="SmallMiningLeaseApplication">Small Mining Lease Application</a>
+</button>
+<button>
+    <a asp-action="LandSurrenderApplication">Land Surrender Application</a>
+</button>
+<button>
+    <a asp-action="LandTransferApplication">Land Transfer Application</a>
+</button>
+

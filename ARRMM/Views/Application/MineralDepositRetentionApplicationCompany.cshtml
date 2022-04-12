@@ -1,0 +1,410 @@
+﻿@model ARRMM.Models.MineralDepositRetentionModel
+
+<h4>MineralDepositRetentionModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="MineralDepositRetentionApplicationCompany">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input asp-for="IsCompany" type="hidden" value="true" />
+            <div class="form-group">
+                <label asp-for="ApplicantName" class="control-label"></label>
+                <input asp-for="ApplicantName" class="form-control" />
+                <span asp-validation-for="ApplicantName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IncorporationDate" class="control-label"></label>
+                <input asp-for="IncorporationDate" class="form-control" />
+                <span asp-validation-for="IncorporationDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RegistrationDate" class="control-label"></label>
+                <input asp-for="RegistrationDate" class="form-control" />
+                <span asp-validation-for="RegistrationDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RegisteredAddress" class="control-label"></label>
+                <input asp-for="RegisteredAddress" class="form-control" />
+                <span asp-validation-for="RegisteredAddress" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BusinessAddress" class="control-label"></label>
+                <input asp-for="BusinessAddress" class="form-control" />
+                <span asp-validation-for="BusinessAddress" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OfficeAddress" class="control-label"></label>
+                <input asp-for="OfficeAddress" class="form-control" />
+                <span asp-validation-for="OfficeAddress" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BusinessNature" class="control-label"></label>
+                <input asp-for="BusinessNature" class="form-control" />
+                <span asp-validation-for="BusinessNature" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Amount" class="control-label"></label>
+                <input asp-for="Amount" class="form-control" />
+                <span asp-validation-for="Amount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="HasShareCapital" /> @Html.DisplayNameFor(model => model.HasShareCapital)
+                    </label>
+                </div>
+            </div>
+            <fieldset>
+                <legend>CompanyControllers</legend>
+                <table id="controllersTable" class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <td>First Name</td>
+                            <td>Last Name</td>
+                            <td>Address</td>
+                            <td>Nationality</td>
+                        </tr>
+                    </thead>
+                    <tr id="controllersTableRow0">
+                        <td>
+                            <div class="editor-field">
+                                <input asp-for="CompanyControllers[0].FirstName" class="form-control" />
+                                <span asp-validation-for="CompanyControllers[0].FirstName" class="text-danger"></span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="editor-field">
+                                <input asp-for="CompanyControllers[0].LastName" class="form-control" />
+                                <span asp-validation-for="CompanyControllers[0].LastName" class="text-danger"></span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="editor-field">
+                                <input asp-for="CompanyControllers[0].Address" class="form-control" />
+                                <span asp-validation-for="CompanyControllers[0].Address" class="text-danger"></span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="editor-field">
+                                <select asp-for="CompanyControllers[0].CountryId" asp-items="Model.Countries"></select>
+                            </div>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-primary" onclick="removeControllersTr(0);">Delete</button>
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                </table>
+                <p>
+                    <button id="addController" type="button" class="btn btn-primary">Add</button>
+                </p>
+            </fieldset>
+            <fieldset>
+                <legend>Directors</legend>
+                <table id="directorsTable" class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <td>First Name</td>
+                            <td>Last Name</td>
+                            <td>Address</td>
+                            <td>Nationality</td>
+                        </tr>
+                    </thead>
+                    <tr id="directorsTableRow0">
+                        <td>
+                            <div class="editor-field">
+                                <input asp-for="Directors[0].FirstName" class="form-control" />
+                                <span asp-validation-for="Directors[0].FirstName" class="text-danger"></span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="editor-field">
+                                <input asp-for="Directors[0].LastName" class="form-control" />
+                                <span asp-validation-for="Directors[0].LastName" class="text-danger"></span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="editor-field">
+                                <input asp-for="Directors[0].Address" class="form-control" />
+                                <span asp-validation-for="Directors[0].Address" class="text-danger"></span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="editor-field">
+                                <select asp-for="Directors[0].CountryId" asp-items="Model.Countries"></select>
+                            </div>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-primary" onclick="removeTr(0);">Delete</button>
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                </table>
+                <p>
+                    <button id="addDirector" type="button" class="btn btn-primary">Add</button>
+                </p>
+            </fieldset>
+            <fieldset>
+                <legend>Officers</legend>
+                <table id="officersTable" class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <td>First Name</td>
+                            <td>Last Name</td>
+                            <td>Address</td>
+                            <td>Nationality</td>
+                        </tr>
+                    </thead>
+                    <tr id="officersTableRow0">
+                        <td>
+                            <div class="editor-field">
+                                <input asp-for="Officers[0].FirstName" class="form-control" />
+                                <span asp-validation-for="Officers[0].FirstName" class="text-danger"></span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="editor-field">
+                                <input asp-for="Officers[0].LastName" class="form-control" />
+                                <span asp-validation-for="Officers[0].LastName" class="text-danger"></span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="editor-field">
+                                <input asp-for="Officers[0].Address" class="form-control" />
+                                <span asp-validation-for="Officers[0].Address" class="text-danger"></span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="editor-field">
+                                <select asp-for="Officers[0].CountryId" asp-items="Model.Countries"></select>
+                            </div>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-primary" onclick="removeTr(0);">Delete</button>
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                </table>
+                <p>
+                    <button id="addOfficer" type="button" class="btn btn-primary">Add</button>
+                </p>
+            </fieldset>
+            <fieldset>
+                <legend>Previous Applied Minerals</legend>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <td>Application Number</td>
+                            <td>Mineral Name</td>
+                            <td>Mineral Code</td>
+                        </tr>
+                    </thead>
+                    @foreach (var appliedMineral in Model.PreviousAppliedMinerals)
+                    {
+                        <tr>
+                            <td>
+                                @appliedMineral.Application.ApplicationNumber
+                            </td>
+                            <td>
+                                @appliedMineral.Mineral.Name
+                            </td>
+                            <td>
+                                @appliedMineral.Mineral.Code
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </fieldset>
+            <div class="form-group">
+                <label asp-for="LandAreaSize" class="control-label"></label>
+                <input asp-for="LandAreaSize" class="form-control" />
+                <span asp-validation-for="LandAreaSize" class="text-danger"></span>
+            </div>
+            <fieldset>
+                <legend>Location</legend>
+                <div class="form-group">
+                    <label asp-for="Location.Description" class="control-label"></label>
+                    <input asp-for="Location.Description" class="form-control" />
+                    <span asp-validation-for="Location.Description" class="text-danger"></span>
+                </div>
+                <table id="locationTable" class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <td>Latitude</td>
+                            <td>Longitude</td>
+                        </tr>
+                    </thead>
+                    <tr id="locationTableRow0">
+                        <td>
+                            <div class="editor-field">
+                                <input asp-for="Location.Coordinates[0].Latitude" class="form-control" />
+                                <span asp-validation-for="Location.Coordinates[0].Latitude" class="text-danger"></span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="editor-field">
+                                <input asp-for="Location.Coordinates[0].Longitude" class="form-control" />
+                                <span asp-validation-for="Location.Coordinates[0].Longitude" class="text-danger"></span>
+                            </div>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-primary" onclick="removeLocationTr(0);">Delete</button>
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                </table>
+                <p>
+                    <button id="addLocation" type="button" class="btn btn-primary">Add</button>
+                </p>
+            </fieldset>
+            <div class="form-group">
+                <label asp-for="SelectedMineralIds" class="control-label"></label>
+                <select multiple="multiple" asp-for="SelectedMineralIds" asp-items="Model.Minerals"></select>
+                <span asp-validation-for="Minerals" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NumberOfYears" class="control-label"></label>
+                <input asp-for="NumberOfYears" class="form-control" />
+                <span asp-validation-for="NumberOfYears" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PreviousApplicationDescription" class="control-label"></label>
+                <input asp-for="PreviousApplicationDescription" class="form-control" />
+                <span asp-validation-for="PreviousApplicationDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PreviousApplicationStatusCode" class="control-label"></label>
+                <select asp-for="PreviousApplicationStatusCode" asp-items="Model.ApplicionStatuses"></select>
+                <span asp-validation-for="PreviousApplicationStatusCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PreviousOperationDescription" class="control-label"></label>
+                <input asp-for="PreviousOperationDescription" class="form-control" />
+                <span asp-validation-for="PreviousOperationDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PreviousOperationStatusCode" class="control-label"></label>
+                <select asp-for="PreviousOperationStatusCode" asp-items="Model.OperationStatuses"></select>
+                <span asp-validation-for="PreviousOperationStatusCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ClaimReason" class="control-label"></label>
+                <input asp-for="ClaimReason" class="form-control" />
+                <span asp-validation-for="ClaimReason" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ExpectedMiningDate" class="control-label"></label>
+                <input asp-for="ExpectedMiningDate" class="form-control" />
+                <span asp-validation-for="ExpectedMiningDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RelatingCompanyName" class="control-label"></label>
+                <input asp-for="RelatingCompanyName" class="form-control" />
+                <span asp-validation-for="RelatingCompanyName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ChangesDetail" class="control-label"></label>
+                <input asp-for="ChangesDetail" class="form-control" />
+                <span asp-validation-for="ChangesDetail" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AssignmentDetail" class="control-label"></label>
+                <input asp-for="AssignmentDetail" class="form-control" />
+                <span asp-validation-for="AssignmentDetail" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Offences" class="control-label"></label>
+                <input asp-for="Offences" class="form-control" />
+                <span asp-validation-for="Offences" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Remarks" class="control-label"></label>
+                <input asp-for="Remarks" class="form-control" />
+                <span asp-validation-for="Remarks" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script type="text/javascript">
+    var controllersCounter = 1;
+    $(function () {
+        $('#addController').click(function () {
+            $('<tr id="controllersTableRow' + controllersCounter + '"><td>' +
+                '<input type="text" class="text-box single-line" name="CompanyControllers[' + controllersCounter + '].FirstName" value="" required="required" />' +
+                '</td>' +
+                '<td>' +
+                '<input type="text" class="text-box single-line" name="CompanyControllers[' + controllersCounter + '].LastName" value="" required="required" />' +
+                '</td>' +
+                '<td>' +
+                '<input type="text" class="text-box single-line" name="CompanyControllers[' + controllersCounter + '].Address" value="" required="required" />' +
+                '</td>' +
+                '<td>' +
+                @*'<select>' +
+                    for (var i = 0; i <= @Model.Countries.Count; i++) {
+                        '<option value = "' +  @Model.Countries[i].Value '" >' +  @Model.Countries[i].Text '</option >'
+                    }
+                    '<option value = "' +  @Model.Countries[0].Value '" >' +  @Model.Countries[0].Text '</option >' +
+                    '<option value = "' +  @Model.Countries[1].Value '" >' +  @Model.Countries[1].Text '</option >' +
+                '</select >' +*@
+                '<input type="text" class="text-box single-line" name="CompanyControllers[' + controllersCounter + '].CountryId" value="" required="required" />' +
+                '</td>' +
+                '<td>' +
+                '<button type="button" class="btn btn-primary" onclick="removeControllersTr(' + controllersCounter + ');">Delete</button>' +
+                '</td>' +
+                '</tr>').appendTo('#controllersTable');
+            controllersCounter++;
+            return false;
+        });
+    });
+    function removeControllersTr(index) {
+        if (controllersCounter > 1) {
+            $('#controllersTableRow' + index).remove();
+            controllersCounter--;
+        }
+        return false;
+    }
+
+
+    var locationCounter = 1;
+    $(function () {
+        $('#addLocation').click(function () {
+            $('<tr id="locationTableRow' + locationCounter + '"><td>' +
+                '<input type="text" class="text-box single-line" name="Location.Coordinates[' + locationCounter + '].Latitude" value="" required="required" />' +
+                '</td>' +
+                '<td>' +
+                '<input type="text" class="text-box single-line" name="Location.Coordinates[' + locationCounter + '].Longitude" value="" required="required" />' +
+                '</td>' +
+                '<td>' +
+                '<button type="button" class="btn btn-primary" onclick="removeLocationTr(' + locationCounter + ');">Delete</button>' +
+                '</td>' +
+                '</tr>').appendTo('#locationTable');
+    locationCounter++;
+    return false;
+        });
+    });
+    function removeLocationTr(index) {
+        if (locationCounter > 1) {
+            $('#locationTableRow' + index).remove();
+            locationCounter--;
+        }
+        return false;
+    }
+    </script>
+}

@@ -1,0 +1,57 @@
+﻿@model ARRMM.Models.LandSurrenderModel
+
+<h4>LandSurrenderModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="LandSurrenderApplication">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ApplicantName" class="control-label"></label>
+                <input asp-for="ApplicantName" class="form-control" />
+                <span asp-validation-for="ApplicantName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SelectedMineralIds" class="control-label"></label>
+                <select multiple="multiple" asp-for="SelectedMineralIds" asp-items="Model.Minerals"></select>
+                <span asp-validation-for="Minerals" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GrantedDate" class="control-label"></label>
+                <input asp-for="GrantedDate" class="form-control" />
+                <span asp-validation-for="GrantedDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RegisteredMineralTitle" class="control-label"></label>
+                <input asp-for="RegisteredMineralTitle" class="form-control" />
+                <span asp-validation-for="RegisteredMineralTitle" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SurrenderDate" class="control-label"></label>
+                <input asp-for="SurrenderDate" class="form-control" />
+                <span asp-validation-for="SurrenderDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LandAreaSize" class="control-label"></label>
+                <input asp-for="LandAreaSize" class="form-control" />
+                <span asp-validation-for="LandAreaSize" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ParticularDetail" class="control-label"></label>
+                <input asp-for="ParticularDetail" class="form-control" />
+                <span asp-validation-for="ParticularDetail" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

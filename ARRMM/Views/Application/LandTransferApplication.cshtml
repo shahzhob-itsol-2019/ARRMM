@@ -1,0 +1,105 @@
+﻿@model ARRMM.Models.LandTransferModel
+
+<h4>LandTransferModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="LandTransferApplication">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ApplicantName" class="control-label"></label>
+                <input asp-for="ApplicantName" class="form-control" />
+                <span asp-validation-for="ApplicantName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SelectedMineralIds" class="control-label"></label>
+                <select multiple="multiple" asp-for="SelectedMineralIds" asp-items="Model.Minerals"></select>
+                <span asp-validation-for="Minerals" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GrantedDate" class="control-label"></label>
+                <input asp-for="GrantedDate" class="form-control" />
+                <span asp-validation-for="GrantedDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RegisteredMineralTitle" class="control-label"></label>
+                <input asp-for="RegisteredMineralTitle" class="form-control" />
+                <span asp-validation-for="RegisteredMineralTitle" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AssigneeName" class="control-label"></label>
+                <input asp-for="AssigneeName" class="form-control" />
+                <span asp-validation-for="AssigneeName" class="text-danger"></span>
+            </div>
+            <fieldset>
+                <legend>Previous Applied Minerals</legend>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <td>Application Number</td>
+                            <td>Mineral Name</td>
+                            <td>Mineral Code</td>
+                        </tr>
+                    </thead>
+                    @foreach (var appliedMineral in Model.PreviousAppliedMinerals)
+                    {
+                        <tr>
+                            <td>
+                                @appliedMineral.Application.ApplicationNumber
+                            </td>
+                            <td>
+                                @appliedMineral.Mineral.Name
+                            </td>
+                            <td>
+                                @appliedMineral.Mineral.Code
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </fieldset>
+            <div class="form-group">
+                <label asp-for="PreviousApplicationDescription" class="control-label"></label>
+                <input asp-for="PreviousApplicationDescription" class="form-control" />
+                <span asp-validation-for="PreviousApplicationDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PreviousApplicationStatusCode" class="control-label"></label>
+                <select asp-for="PreviousApplicationStatusCode" asp-items="Model.ApplicionStatuses"></select>
+                <span asp-validation-for="PreviousApplicationStatusCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PreviousOperationDescription" class="control-label"></label>
+                <input asp-for="PreviousOperationDescription" class="form-control" />
+                <span asp-validation-for="PreviousOperationDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PreviousOperationStatusCode" class="control-label"></label>
+                <select asp-for="PreviousOperationStatusCode" asp-items="Model.OperationStatuses"></select>
+                <span asp-validation-for="PreviousOperationStatusCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Reason" class="control-label"></label>
+                <input asp-for="Reason" class="form-control" />
+                <span asp-validation-for="Reason" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Remarks" class="control-label"></label>
+                <input asp-for="Remarks" class="form-control" />
+                <span asp-validation-for="Remarks" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
